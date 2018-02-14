@@ -239,7 +239,7 @@ Creates filters for a wallet contract, to watch for deposits, pending confirmati
 */
 var setupContractFilters = function(newDocument, checkFromCreationBlock){
     var blockToCheckBack = (newDocument.checkpointBlock || 0) - ethereumConfig.rollBackBy;
-    
+
     if(checkFromCreationBlock || blockToCheckBack < 0)
         blockToCheckBack = newDocument.creationBlock;
 
@@ -350,7 +350,7 @@ var setupContractFilters = function(newDocument, checkFromCreationBlock){
 
         var filter = contractInstance.allEvents({fromBlock: blockToCheckBack, toBlock: 'latest'});
         events.push(filter);
-        
+
         // get past logs, to set the new blockNumber
         var currentBlock = EthBlocks.latest.number;
         filter.get(function(error, logs) {
@@ -410,7 +410,7 @@ var setupContractFilters = function(newDocument, checkFromCreationBlock){
                         Transactions.remove({_id: Helpers.makeId('tx', log.transactionHash)});
                         return;
                     }
-                    
+
                     Helpers.eventLogs(log.event +' for '+ newDocument.address +' arrived in block: #'+ log.blockNumber, log.args.value.toNumber());
 
                     var txExists = addTransaction(log, newDocument.address, log.args.to, log.args.value.toString(10));
@@ -487,7 +487,7 @@ var setupContractFilters = function(newDocument, checkFromCreationBlock){
                                 Transactions.remove(extistingTxId);
                             }, 500);
                         }
-                        
+
                     });
                 }
                 if(log.event === 'OwnerAdded') {
@@ -557,7 +557,7 @@ observeWallets = function(){
                         web3.eth.getCode(newDocument.address, function(e, code){
                             if(!e) {
                                 if(code.length > 2) {
-                                    updateContractData(newDocument);                                
+                                    updateContractData(newDocument);
 
                                 // check for wallet data
                                 } else {
@@ -687,10 +687,10 @@ observeWallets = function(){
                                         closeable: false
                                     });
                                 }
-                                
+
                             } else {
                                 console.log('Error while deploying wallet', error);
-                                
+
                                 GlobalNotification.error({
                                     content: error.message,
                                     duration: 8
