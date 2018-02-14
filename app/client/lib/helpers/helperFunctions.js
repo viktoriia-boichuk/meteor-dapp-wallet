@@ -318,8 +318,24 @@ Helpers.formatTransactionBalance = function(value, exchangeRates, unit) {
         var price = new BigNumber(String(web3.fromWei(value, 'ether')), 10).times(exchangeRates[unit].price);
         return EthTools.formatNumber(price, format) + ' '+ unit.toUpperCase();
     } else {
-        return EthTools.formatBalance(value, format + '[0000000000000000] UNIT');
+        return Helpers.auxFormatBalance(value, format + '[0000000000000000] UNIT');
     }
+};
+
+/**
+Wrapper around formatBalance for AUX value(s)
+
+    Helpers.auxFormatBalance(wei, format, unit)
+
+@method auxFormatBalance
+@param {String} wei  the amount of wei to convert and format
+@param {Object} format  the format see numeral.js for examples, e.g. "0,0.00[0000]"
+@param {String} unit  (optional) the unit to convert the given wei amount to, if not given it will use EthTools.getUnit()
+@return {String} The formated value
+**/
+Helpers.auxFormatBalance = function(wei, format, unit) {
+    var formatted = EthTools.formatBalance(wei, format, unit);
+    return (unit === 'ether' || _.isUndefined(unit)) ? formatted.substring(0, formatted.length - 5) + 'AUX' : formatted;
 };
 
 

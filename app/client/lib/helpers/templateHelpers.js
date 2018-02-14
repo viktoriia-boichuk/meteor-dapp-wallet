@@ -85,7 +85,7 @@ Template.registerHelper('isVulnerable', function(address){
         // add vulnerabilities to account
         account.vulnerabilities = wallet.vulnerabilities;
         return account;
-    } else 
+    } else
         return false;
 });
 
@@ -114,7 +114,7 @@ Returns a list of accounts and wallets sorted by balance
 **/
 Template.registerHelper('selectAccounts', function(hideWallets){
     var accounts = EthAccounts.find({balance:{$ne:"0"}}, {sort: {balance: 1}}).fetch();
-    
+
     if(hideWallets !== true)
         accounts = _.union(Wallets.find({owners: {$in: _.pluck(EthAccounts.find().fetch(), 'address')}, address: {$exists: true}}, {sort: {name: 1}}).fetch(), accounts);
 
@@ -201,8 +201,20 @@ Formats a given transactions balance
 **/
 Template.registerHelper('formatTransactionBalance', Helpers.formatTransactionBalance);
 
+/**
+Wrapper around formatBalance for AUX value(s)
 
-/** 
+    Helpers.auxFormatBalance(wei, format, unit)
+
+@method auxFormatBalance
+@param {String} wei  the amount of wei to convert and format
+@param {Object} format  the format see numeral.js for examples, e.g. "0,0.00[0000]"
+@param {String} unit  (optional) the unit to convert the given wei amount to, if not given it will use EthTools.getUnit()
+@return {String} The formated value
+**/
+Template.registerHelper('auxFormatBalance', Helpers.auxFormatBalance);
+
+/**
 Formats address to a CaseChecksum
 
 @method toChecksumAddress
@@ -215,7 +227,7 @@ Template.registerHelper('toChecksumAddress', function(address){
 
 
 
-/** 
+/**
 Takes a camelcase and shows it with spaces
 
 @method toSentence
@@ -223,4 +235,3 @@ Takes a camelcase and shows it with spaces
 @return {string} sentence    The same name with spaces
 **/
 Template.registerHelper('toSentence', Helpers.toSentence);
-
