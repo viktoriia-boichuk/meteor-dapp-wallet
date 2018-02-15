@@ -334,8 +334,34 @@ Wrapper around formatBalance for AUX value(s)
 @return {String} The formated value
 **/
 Helpers.auxFormatBalance = function(wei, format, unit) {
+    var auxUnit = 'AUX';
+    switch (unit) {
+      case 'ether':
+        // nothing to do
+        break;
+      case 'finney':
+        auxUnit = 'ml' + auxUnit;
+        break;
+      case 'szabo':
+        auxUnit = 'm' + auxUnit;
+        break;
+      case 'shannon':
+        auxUnit = 'n' + auxUnit;
+        break;
+      case 'lovelace':
+        auxUnit = 'p' + auxUnit;
+        break;
+      case 'babbage':
+        auxUnit = 'f' + auxUnit;
+        break;
+      case 'wei':
+        auxUnit = 'a' + auxUnit;
+        break;
+      default:
+        break;
+    }
     var formatted = EthTools.formatBalance(wei, format, unit);
-    return (unit === 'ether' || _.isUndefined(unit)) ? formatted.substring(0, formatted.length - 5) + 'AUX' : formatted;
+    return formatted.substring(0, formatted.lastIndexOf(' ')) + ' ' + auxUnit;
 };
 
 
