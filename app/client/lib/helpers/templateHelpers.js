@@ -118,6 +118,12 @@ Template.registerHelper('selectAccounts', function(hideWallets){
     if(hideWallets !== true)
         accounts = _.union(Wallets.find({owners: {$in: _.pluck(EthAccounts.find().fetch(), 'address')}, address: {$exists: true}}, {sort: {name: 1}}).fetch(), accounts);
 
+    accounts = accounts.map(function(account) {
+      if(account.name.toLowerCase().includes('etherbase')) {
+        account.name = 'Main account (base)';
+      }
+      return account;
+    });
     return accounts;
 });
 
