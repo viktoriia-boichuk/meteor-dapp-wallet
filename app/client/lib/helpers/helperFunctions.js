@@ -91,7 +91,7 @@ Helpers.getLocalStorageSize = function() {
   var size = 0;
   if (localStorage) {
     _.each(Object.keys(localStorage), function(key) {
-      size += localStorage[key].length * 2 / 1024 / 1024;
+      size += (localStorage[key].length * 2) / 1024 / 1024;
     });
   }
 
@@ -315,8 +315,50 @@ Helpers.formatTransactionBalance = function(value, exchangeRates, unit) {
     );
     return EthTools.formatNumber(price, format) + ' ' + unit.toUpperCase();
   } else {
-    return EthTools.formatBalance(value, format + '[0000000000000000] UNIT');
+    return Helpers.auxFormatBalance(value, format + '[0000000000000000] UNIT');
   }
+};
+
+/**
+Wrapper around formatBalance for AUX value(s)
+
+    Helpers.auxFormatBalance(wei, format, unit)
+
+@method auxFormatBalance
+@param {String} wei  the amount of wei to convert and format
+@param {Object} format  the format see numeral.js for examples, e.g. "0,0.00[0000]"
+@param {String} unit  (optional) the unit to convert the given wei amount to, if not given it will use EthTools.getUnit()
+@return {String} The formated value
+**/
+Helpers.auxFormatBalance = function(wei, format, unit) {
+  var auxUnit = 'AUX';
+  switch (unit) {
+    case 'ether':
+      // nothing to do
+      break;
+    case 'finney':
+      auxUnit = 'ml' + auxUnit;
+      break;
+    case 'szabo':
+      auxUnit = 'm' + auxUnit;
+      break;
+    case 'shannon':
+      auxUnit = 'n' + auxUnit;
+      break;
+    case 'lovelace':
+      auxUnit = 'p' + auxUnit;
+      break;
+    case 'babbage':
+      auxUnit = 'f' + auxUnit;
+      break;
+    case 'wei':
+      auxUnit = 'a' + auxUnit;
+      break;
+    default:
+      break;
+  }
+  var formatted = EthTools.formatBalance(wei, format, unit);
+  return formatted.substring(0, formatted.lastIndexOf(' ')) + ' ' + auxUnit;
 };
 
 /**

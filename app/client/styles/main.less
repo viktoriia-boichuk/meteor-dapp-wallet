@@ -9,7 +9,19 @@
 
 // Change Default constants
 
-@colorLink: #02a8f3;
+.dapp-header nav > ul a,
+.dapp-header nav > ul a:visited,
+.dapp-header nav > ul button {
+  color: #999997;
+}
+.dapp-header nav > ul > li.active a,
+.dapp-header nav > ul > li.active button,
+.dapp-header nav > ul > li button.active,
+.dapp-header nav > ul > li a.active {
+  color: #b8b8b8;
+}
+
+@colorLink: #a7da07;
 
 @heightHeader: @gridWidth * 2.5;
 
@@ -100,7 +112,13 @@ body {
   }
   .dapp-header {
     background-color: @colorLinuxBackgroundFocus;
-    .background-image(linear-gradient(to bottom,  @colorLinuxBackgroundFocus 20%, lighten(@colorLinuxBackgroundFocus, 5%) 90%));
+    .background-image(
+      linear-gradient(
+        to bottom,
+        @colorLinuxBackgroundFocus 20%,
+        lighten(@colorLinuxBackgroundFocus, 5%) 90%
+      )
+    );
     color: @colorWhite;
 
     nav a,
@@ -126,7 +144,13 @@ body {
   }
   .dapp-header {
     background-color: @colorOSBackgroundFocus;
-    .background-image(linear-gradient(to top,  @colorOSBackgroundFocus 20%, lighten(@colorOSBackgroundFocus, 10%) 90%));
+    .background-image(
+      linear-gradient(
+        to top,
+        @colorOSBackgroundFocus 20%,
+        lighten(@colorOSBackgroundFocus, 10%) 90%
+      )
+    );
 
     nav > ul {
       margin-left: @gridWidth;
@@ -150,7 +174,9 @@ body {
   padding-left: @gridWidth * 2.5;
   background-color: @colorWinBackgroundFocus;
   -webkit-app-region: drag; // necessary to drag the wallet window
-  .background-image(linear-gradient(to bottom,  @colorWinBackgroundFocus 50%, #ddd9d9 90%));
+  .background-image(
+    linear-gradient(to bottom, @colorWinBackgroundFocus 50%, #ddd9d9 90%)
+  );
   background: #f0f0f0;
 
   &.dapp-small {
@@ -960,13 +986,13 @@ span.address.not-ens-name {
 
 /* Custom icon size for auto-scan button on contracts.html */
 .account-pattern .icon-target {
-    font-size: 0.5em;
+  font-size: 0.5em;
 }
 
 button.token-auto-scan {
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 table.transactions {

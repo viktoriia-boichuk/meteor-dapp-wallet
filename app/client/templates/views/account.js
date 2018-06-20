@@ -240,7 +240,9 @@ Template['views_account'].helpers({
           .slice(0, -1)
           .reverse()
           .join(' ▸ ')
-      : this.name;
+      : this.name.toLowerCase().includes('etherbase')
+        ? 'Main account (base)'
+        : this.name;
   }
 });
 

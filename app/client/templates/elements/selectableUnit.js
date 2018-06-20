@@ -18,7 +18,7 @@ The available units
 */
 selectableUnits = [
   {
-    text: 'ETHER',
+    text: 'AUX',
     value: 'ether'
   },
   {

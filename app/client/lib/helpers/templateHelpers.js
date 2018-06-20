@@ -157,6 +157,13 @@ Template.registerHelper('selectAccounts', function(hideWallets) {
       accounts
     );
 
+  accounts = accounts.map(function(account) {
+    if (account.name.toLowerCase().includes('etherbase')) {
+      account.name = 'Main account (base)';
+    }
+    return account;
+  });
+
   return accounts;
 });
 
@@ -238,6 +245,19 @@ Template.registerHelper(
   'formatTransactionBalance',
   Helpers.formatTransactionBalance
 );
+
+/**
+Wrapper around formatBalance for AUX value(s)
+
+    Helpers.auxFormatBalance(wei, format, unit)
+
+@method auxFormatBalance
+@param {String} wei  the amount of wei to convert and format
+@param {Object} format  the format see numeral.js for examples, e.g. "0,0.00[0000]"
+@param {String} unit  (optional) the unit to convert the given wei amount to, if not given it will use EthTools.getUnit()
+@return {String} The formated value
+**/
+Template.registerHelper('auxFormatBalance', Helpers.auxFormatBalance);
 
 /**
 Formats address to a CaseChecksum

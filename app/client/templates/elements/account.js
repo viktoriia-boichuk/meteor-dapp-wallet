@@ -127,7 +127,7 @@ Template['elements_account'].helpers({
     return blocksForConfirmation >= confirmations && confirmations >= 0
       ? {
           confirmations: confirmations,
-          percent: confirmations / blocksForConfirmation * 100
+          percent: (confirmations / blocksForConfirmation) * 100
         }
       : false;
   },
@@ -142,7 +142,9 @@ Template['elements_account'].helpers({
           .slice(0, -1)
           .reverse()
           .join(' ▸ ')
-      : this.name;
+      : this.name.toLowerCase().includes('etherbase')
+        ? 'Main account (base)'
+        : this.name;
   },
   /**
     Adds class about ens
