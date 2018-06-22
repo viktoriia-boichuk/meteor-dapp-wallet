@@ -279,25 +279,8 @@ var accountClipboardEventHandler = function(e) {
     selection.removeAllRanges();
   }
 
-  if (Helpers.isOnMainNetwork()) {
-    Session.set('tmpAllowCopy', true);
-    copyAddress();
-  } else {
-    EthElements.Modal.question({
-      text: new Spacebars.SafeString(
-        TAPi18n.__('wallet.accounts.modal.copyAddressWarning')
-      ),
-      ok: function() {
-        Session.set('tmpAllowCopy', true);
-        copyAddress();
-      },
-      cancel: true,
-      modalQuestionOkButtonText: TAPi18n.__('wallet.accounts.modal.buttonOk'),
-      modalQuestionCancelButtonText: TAPi18n.__(
-        'wallet.accounts.modal.buttonCancel'
-      )
-    });
-  }
+  Session.set('tmpAllowCopy', true);
+  copyAddress();
 };
 
 Template['views_account'].events({
