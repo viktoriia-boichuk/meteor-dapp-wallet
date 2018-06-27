@@ -22,29 +22,29 @@ selectableUnits = [
     value: 'ether'
   },
   {
-    text: 'FINNEY', //(µΞ)
+    text: 'mlAUX',
     value: 'finney'
-  },
-  {
-    text: 'BTC',
-    value: 'btc'
-  },
-  {
-    text: 'USD',
-    value: 'usd'
-  },
-  {
-    text: 'EUR',
-    value: 'eur'
-  },
-  {
-    text: 'GBP',
-    value: 'gbp'
-  },
-  {
-    text: 'BRL',
-    value: 'brl'
   }
+  // {
+  //   text: 'BTC',
+  //   value: 'btc'
+  // },
+  // {
+  //   text: 'USD',
+  //   value: 'usd'
+  // },
+  // {
+  //   text: 'EUR',
+  //   value: 'eur'
+  // },
+  // {
+  //   text: 'GBP',
+  //   value: 'gbp'
+  // },
+  // {
+  //   text: 'BRL',
+  //   value: 'brl'
+  // }
 ];
 
 // Aprils fool
@@ -96,7 +96,7 @@ Template['elements_selectableUnit'].helpers({
     @method (selectedUnit)
     */
   selectable: function() {
-    return Session.get('network') == 'main';
+    return Session.get('network') != 'test';
   }
 });
 

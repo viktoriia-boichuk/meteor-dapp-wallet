@@ -15,9 +15,9 @@ updateMistBadge = function() {
       0
     );
 
-    mist.menu.setBadge(
-      EthTools.formatBalance(balance, '0.0 a', 'ether') + ' AUX'
-    );
+    // mist.menu.setBadge(
+    //   EthTools.formatBalance(balance, '0.0 a', 'ether') + ' AUX'
+    // );
   }
 };
 
