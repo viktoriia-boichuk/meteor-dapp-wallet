@@ -568,12 +568,13 @@ Template['views_send'].events({
     e,
     template
   ) {
+    console.log('777777777777777777777777777');
     // ether
     if (TemplateVar.get('selectedToken') === 'ether') {
       var wei = EthTools.toWei(e.currentTarget.value.replace(',', '.'));
 
       TemplateVar.set('amount', wei || '0');
-
+      console.log(TemplateVar.get('amount'));
       checkOverDailyLimit(
         template.find('select[name="dapp-select-account"].send-from').value,
         wei,
@@ -644,6 +645,7 @@ Template['views_send'].events({
           duration: 2
         });
 
+      console.log('tokenAddress', tokenAddress);
       if (tokenAddress === 'ether') {
         if (
           (_.isEmpty(amount) || amount === '0' || !_.isFinite(amount)) &&
@@ -818,7 +820,8 @@ Template['views_send'].events({
       // SHOW CONFIRMATION WINDOW when NOT MIST
       if (typeof mist === 'undefined') {
         console.log('estimatedGas: ' + estimatedGas);
-
+        console.log('estim333atedGas: ' + estimatedGas);
+        console.log(amount);
         EthElements.Modal.question(
           {
             template: 'views_modals_sendTransactionInfo',
