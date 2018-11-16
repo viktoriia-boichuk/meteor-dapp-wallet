@@ -562,22 +562,17 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
         // NOTIFICATION
         if (!txExists || !txExists.tokenId) {
           var txId = Helpers.makeId('tx', log.transactionHash);
-          var formatted = EthTools.formatBalance(
-            log.returnValues.value,
-            '0,0.00[000000] unit',
-            'ether'
-          );
-          formatted =
-            formatted.substring(0, formatted.lastIndexOf('ether')) +
-            ' ' +
-            auxUnit;
 
           Helpers.showNotification(
             'wallet.transactions.notifications.incomingTransaction',
             {
               to: Helpers.getAccountNameByAddress(newDocument.address),
               from: Helpers.getAccountNameByAddress(log.returnValues.from),
-              amount: formatted
+              amount: EthTools.formatBalance(
+                log.returnValues.value,
+                '0,0.00[000000]',
+                'ether'
+              )
             },
             function() {
               // on click show tx info
