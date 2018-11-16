@@ -567,11 +567,11 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
             '0,0.00[000000] unit',
             'ether'
           );
-          return (
+          formatted =
             formatted.substring(0, formatted.lastIndexOf('ether')) +
             ' ' +
-            auxUnit
-          );
+            auxUnit;
+
           Helpers.showNotification(
             'wallet.transactions.notifications.incomingTransaction',
             {
