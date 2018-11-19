@@ -573,7 +573,7 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
                   log.returnValues.value,
                   '0,0.00[000000]',
                   'ether'
-                ) + 'AUX'
+                ) + ' AUX'
             },
             function() {
               // on click show tx info
@@ -630,7 +630,7 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
                   log.returnValues.value,
                   '0,0.00[000000]',
                   'ether'
-                ) + 'AUX'
+                ) + ' AUX'
             },
             function() {
               // on click show tx info
@@ -713,7 +713,7 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
                       log.returnValues.value,
                       '0,0.00[000000]',
                       'ether'
-                    ) + 'AUX'
+                    ) + ' AUX'
                 },
                 function() {
                   FlowRouter.go('/account/' + newDocument.address);
