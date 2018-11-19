@@ -625,11 +625,12 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
             {
               to: Helpers.getAccountNameByAddress(log.returnValues.to),
               from: Helpers.getAccountNameByAddress(newDocument.address),
-              amount: EthTools.formatBalance(
-                log.returnValues.value,
-                '0,0.00[000000] unit',
-                'ether'
-              )
+              amount:
+                EthTools.formatBalance(
+                  log.returnValues.value,
+                  '0,0.00[000000]',
+                  'ether'
+                ) + 'AUX'
             },
             function() {
               // on click show tx info
@@ -707,11 +708,12 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
                   ),
                   to: Helpers.getAccountNameByAddress(log.returnValues.to),
                   from: Helpers.getAccountNameByAddress(newDocument.address),
-                  amount: EthTools.formatBalance(
-                    log.returnValues.value,
-                    '0,0.00[000000] unit',
-                    'ether'
-                  )
+                  amount:
+                    EthTools.formatBalance(
+                      log.returnValues.value,
+                      '0,0.00[000000]',
+                      'ether'
+                    ) + 'AUX'
                 },
                 function() {
                   FlowRouter.go('/account/' + newDocument.address);
