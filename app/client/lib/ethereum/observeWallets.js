@@ -568,11 +568,12 @@ var setupContractSubscription = function(newDocument, checkFromCreationBlock) {
             {
               to: Helpers.getAccountNameByAddress(newDocument.address),
               from: Helpers.getAccountNameByAddress(log.returnValues.from),
-              amount: EthTools.formatBalance(
-                log.returnValues.value,
-                '0,0.00[000000]',
-                'ether'
-              )
+              amount:
+                EthTools.formatBalance(
+                  log.returnValues.value,
+                  '0,0.00[000000]',
+                  'ether'
+                ) + 'AUX'
             },
             function() {
               // on click show tx info
