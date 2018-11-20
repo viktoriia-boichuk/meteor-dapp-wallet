@@ -697,6 +697,7 @@ Template['views_send'].events({
         estimatedGas =
           estimatedGas || Number($('.send-transaction-info input.gas').val());
         console.log('Finally choosen gas', estimatedGas);
+        console.log('selectedAccount', selectedAccount._id);
 
         // CONTRACT TX
         if (contracts['ct_' + selectedAccount._id]) {
