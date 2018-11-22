@@ -268,11 +268,13 @@ Template['elements_executeContract_function'].onRendered(function() {
 
 Template['elements_executeContract_function'].helpers({
   reactiveDataContext: function() {
-    if (this.inputs.length === 0)
+    if (this.inputs.length === 0) {
       TemplateVar.set(
         'executeData',
-        this.contractInstance.methods[this.name].encodeABI()
+        this.contractInstance.methods.incrementCounter().encodeABI()
       );
+      console.log('function', this.name);
+    }
   },
   payable: function() {
     return this && this.payable;
