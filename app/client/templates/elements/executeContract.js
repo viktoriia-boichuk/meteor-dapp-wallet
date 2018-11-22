@@ -271,9 +271,13 @@ Template['elements_executeContract_function'].helpers({
     if (this.inputs.length === 0) {
       TemplateVar.set(
         'executeData',
-        this.contractInstance.methods.incrementCounter().encodeABI()
+        this.contractInstance.methods[this.name]().encodeABI()
       );
-      console.log('function', this.name);
+      console.log(
+        'function',
+        this.name,
+        this.contractInstance.methods[this.name]().encodeABI()
+      );
     }
   },
   payable: function() {
