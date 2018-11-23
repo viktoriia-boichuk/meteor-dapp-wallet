@@ -266,6 +266,7 @@ Template['views_account_create'].events({
     @event change input[type="radio"]
     */
   'change input[type="radio"]': function(e) {
+    console.log('selectedSection', e.currentTarget.value);
     TemplateVar.set('selectedSection', e.currentTarget.value);
   },
   /**
@@ -355,7 +356,9 @@ Template['views_account_create'].events({
     if (type === 'import') {
       var owners = _.uniq(
         _.compact(
-          _.map(TemplateVar.get('importWalletOwners'), function(item) {
+          _.map(TemplateVar.get(template, 'importWalletOwners'), function(
+            item
+          ) {
             if (web3.utils.isAddress(item)) return item.toLowerCase();
           })
         )
@@ -378,17 +381,20 @@ Template['views_account_create'].events({
         owners.unshift(account.address);
       }
 
-      Wallets.insert({
-        owners: owners,
-        name:
-          template.find('input[name="accountName"]').value ||
-          TAPi18n.__('wallet.accounts.defaultName'),
-        address: address,
-        balance: '0',
-        // TODO set to 0
-        creationBlock: 300000,
-        imported: true
-      });
+      Wallets.upsert(
+        { address: address },
+        {
+          $set: {
+            owners: owners,
+            name:
+              template.find('input[name="accountName"]').value ||
+              TAPi18n.__('wallet.accounts.defaultName'),
+            address: address,
+            balance: '0',
+            creationBlock: 0
+          }
+        }
+      );
 
       FlowRouter.go('dashboard');
     }
