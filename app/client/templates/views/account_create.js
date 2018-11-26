@@ -266,8 +266,10 @@ Template['views_account_create'].events({
     @event change input[type="radio"]
     */
   'change input[type="radio"]': function(e) {
-    console.log('selectedSection', e.currentTarget.value);
     TemplateVar.set('selectedSection', e.currentTarget.value);
+    if (TemplateVar.get('selectedSection') === 'import')
+      document.getElementById('addWallet').innerHTML = 'import';
+    else document.getElementById('addWallet').innerHTML = 'create';
   },
   /**
     Change the number of signatures
