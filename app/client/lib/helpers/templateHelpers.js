@@ -143,7 +143,7 @@ Template.registerHelper('selectAccounts', function(hideWallets) {
         {
           owners: {
             $in: _.map(EthAccounts.find().fetch(), function(account) {
-              return account.address.toLowerCase();
+              return account.address;
             })
           },
           address: {
